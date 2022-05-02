@@ -12,12 +12,12 @@ export default ({title, items}) => {
 
     return (
         <div className='list-main'>
-            <div className='moveLeft'>
+            {/* <div className='moveLeft'>
                 <ArrowBack />
             </div>
             <div className='moveRight'>
                 <img src={ArrowForward} />
-            </div>
+            </div> */}
 
             <h2>{title}</h2>
             <div className='listarea'>
