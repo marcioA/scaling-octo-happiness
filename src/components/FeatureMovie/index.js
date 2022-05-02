@@ -13,7 +13,7 @@ export default ({item}) => {
                     </div>
                     <div className='infos'>
                         <div className='points'>
-                            {item.info.vote_average} pontos
+                            {item.info.vote_average} ponto{item.info.vote_average > 1 ? 's': ''}
                         </div>
                         <div className='year_lauch'>
                             {new Date(item.info.first_air_date).getFullYear()}
