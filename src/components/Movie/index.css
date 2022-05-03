@@ -6,13 +6,13 @@
     margin: 30px 0px 15px 30px;
 }
 
+.list {
+    transition: all ease 0.3s;
+}
+
 .listarea {
     overflow-x: hidden;
     padding-left: 30px;
-}
-
-.list {
-    width: 9000000px;
 }
 
 .item {
@@ -34,12 +34,19 @@
 .moveLeft, .moveRight {
     position: absolute;
     width: 40px;
-    height: 225px;
-    background-color: transparent;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 99;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all ease 0.5s;
+}
+
+.moveLeft img, .moveRight img {
+    filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
 }
 
 .moveLeft {
@@ -48,4 +55,9 @@
 
 .moveRight {
     right: 0;
+}
+
+.list-main:hover .moveLeft, 
+.list-main:hover .moveRight {
+    opacity: 1;
 }
