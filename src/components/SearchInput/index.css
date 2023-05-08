@@ -1,0 +1,18 @@
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.searchInput {
+    width: 500px;
+}
+
+.searchIcon {
+    margin-left: 0.2rem;
+}
+
+#searchInputfield {
+    color: #FFF;
+}

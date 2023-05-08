@@ -8,16 +8,17 @@ import ArrowForward from '../../assets/arrow-right.svg';
 
 // }
 
-export default ({title, items}) => {
-    const listSize = items.results.length*150;
+export default ({ title, items }) => {
+    console.log(items);
+    const listSize = items.items.length * 150;
 
     const [scrollX, setScrollX] = useState(0);
     const [notShowLeft, setNotShowLeft] = useState(0);
     const [notShowRight, setNotShowRight] = useState(null);
 
     const handleLeftArrow = () => {
-        const limit = scrollX + Math.round(window.innerWidth/2);
-        if (limit > 0){
+        const limit = scrollX + Math.round(window.innerWidth / 2);
+        if (limit > 0) {
             setNotShowLeft(0)
             return setScrollX(0);
         }
@@ -26,11 +27,11 @@ export default ({title, items}) => {
     }
 
     const handleRightArrow = () => {
-        const limit = scrollX - Math.round(window.innerWidth/2);
+        const limit = scrollX - Math.round(window.innerWidth / 2);
         setNotShowLeft(1)
-        if ((window.innerWidth - listSize) > limit){
+        if ((window.innerWidth - listSize) > limit) {
             setNotShowRight(0);
-            return setScrollX((window.innerWidth-listSize)-60);
+            return setScrollX((window.innerWidth - listSize) - 60);
         }
         return setScrollX(limit);
     }
@@ -40,12 +41,12 @@ export default ({title, items}) => {
             <div className='moveLeft' onClick={handleLeftArrow} style={{
                 opacity: notShowLeft
             }}>
-                <img src={ArrowBack} style={{fontSize: 50}} />
+                <img src={ArrowBack} style={{ fontSize: 50 }} />
             </div>
             <div className='moveRight' style={{
                 opacity: notShowRight
             }}>
-                <img src={ArrowForward} style={{fontSize: 50}} onClick={handleRightArrow} />
+                <img src={ArrowForward} style={{ fontSize: 50 }} onClick={handleRightArrow} />
             </div>
 
             <h2>{title}</h2>
@@ -54,9 +55,9 @@ export default ({title, items}) => {
                     marginLeft: scrollX,
                     width: listSize
                 }}>
-                    {items?.results.length > 0 && items.results.map((item, key)=>( 
+                    {items?.items.length > 0 && items.items.map((item, key) => (
                         <div className='item'>
-                            <img src={`https://image.tmdb.org/t/p/w300${item.poster_path}`} alt={item.original_title} />
+                            <img src={item.volumeInfo.imageLinks.thumbnail} alt={item.volumeInfo.title} />
                         </div>
                     ))}
                 </div>

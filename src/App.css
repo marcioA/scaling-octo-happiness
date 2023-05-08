@@ -6,16 +6,16 @@
 
 body {
   background-color: #111;
-  color: #FFF;
+  color: #d9d5d5;
   margin: 0;
   font-family: 'Roboto', sans-serif;
 }
 
 .lists {
-  margin-top: -150px;
+  margin-top: 150px;
 }
 
-.loading { 
+.loading {
   position: fixed;
   left: 0;
   top: 0;
