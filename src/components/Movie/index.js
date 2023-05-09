@@ -1,62 +1,24 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './index.css';
-import ArrowBack from '../../assets/arrow-left.svg';
-import ArrowForward from '../../assets/arrow-right.svg';
 
 // type MovieType = {
 //     title: String;
 
 // }
 
-export default ({ title, items }) => {
-    console.log(items);
-    const listSize = items.items.length * 150;
-
-    const [scrollX, setScrollX] = useState(0);
-    const [notShowLeft, setNotShowLeft] = useState(0);
-    const [notShowRight, setNotShowRight] = useState(null);
-
-    const handleLeftArrow = () => {
-        const limit = scrollX + Math.round(window.innerWidth / 2);
-        if (limit > 0) {
-            setNotShowLeft(0)
-            return setScrollX(0);
-        }
-        setNotShowRight(1);
-        return setScrollX(limit);
-    }
-
-    const handleRightArrow = () => {
-        const limit = scrollX - Math.round(window.innerWidth / 2);
-        setNotShowLeft(1)
-        if ((window.innerWidth - listSize) > limit) {
-            setNotShowRight(0);
-            return setScrollX((window.innerWidth - listSize) - 60);
-        }
-        return setScrollX(limit);
-    }
-
+export default ({ title, items, typedTextSearch }) => {
+    const [listItems, setListItems] = useState([]);
+    useEffect(() => {
+        if (!typedTextSearch) return setListItems(items);
+        setListItems(listItems.filter(item => item.volumeInfo.title.includes(typedTextSearch)));
+    }, [typedTextSearch])
     return (
         <div className='list-main'>
-            <div className='moveLeft' onClick={handleLeftArrow} style={{
-                opacity: notShowLeft
-            }}>
-                <img src={ArrowBack} style={{ fontSize: 50 }} />
-            </div>
-            <div className='moveRight' style={{
-                opacity: notShowRight
-            }}>
-                <img src={ArrowForward} style={{ fontSize: 50 }} onClick={handleRightArrow} />
-            </div>
-
             <h2>{title}</h2>
             <div className='listarea'>
-                <div className='list' style={{
-                    marginLeft: scrollX,
-                    width: listSize
-                }}>
-                    {items?.items.length > 0 && items.items.map((item, key) => (
-                        <div className='item'>
+                <div className='list' >
+                    {listItems?.length > 0 && listItems.map((item, key) => (
+                        <div className='item' key={key}>
                             <img src={item.volumeInfo.imageLinks.thumbnail} alt={item.volumeInfo.title} />
                         </div>
                     ))}

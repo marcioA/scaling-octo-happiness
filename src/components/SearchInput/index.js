@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
 import { TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-// type MovieType = {
-//     title: String;
+export const SearchInput = ({ searchTerm }) => {
+    const [typeString, setTypeString] = useState('');
 
-// }
-
-export const SearchInput = ({ searchTem }) => {
+    useEffect(() => {
+        searchTerm(typeString);
+    }, [typeString])
 
     return (
         <div className='search'>
@@ -20,6 +20,8 @@ export const SearchInput = ({ searchTem }) => {
                     variant="filled"
                     color='primary'
                     id='searchInputfield'
+                    value={typeString}
+                    onChange={e => setTypeString(e.target.value)}
                     focused
                 />
             </div>

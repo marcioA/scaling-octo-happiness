@@ -5,8 +5,8 @@ import Book from './components/Movie';
 import Header from './components/Header';
 
 export default () => {
-
   const [bookList, setBookList] = useState([]);
+  const [typedText, setTypedText] = useState('');
 
   useEffect(() => {
     const loadAll = async () => {
@@ -17,18 +17,14 @@ export default () => {
 
   }, []);
 
-  useEffect(() => {
-    console.log(bookList)
-  }, [bookList])
-
   return (
     <div className='page'>
-      <Header activeBlack={true} />
+      <Header activeBlack={true} searchTerm={setTypedText} />
 
       <section className='lists'>
         {bookList.map((item, key) => (
-          <div>
-            <Book key={key} title={item.title} items={item.items} />
+          <div key={key}>
+            <Book title={item.title} items={item.items.items} typedTextSearch={typedText} />
           </div>
         ))}
       </section>
