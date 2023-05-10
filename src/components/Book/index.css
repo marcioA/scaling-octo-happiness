@@ -31,7 +31,8 @@
     transform: scale(1);
 }
 
-.moveLeft, .moveRight {
+.moveLeft,
+.moveRight {
     position: absolute;
     width: 40px;
     height: 300px;
@@ -45,7 +46,8 @@
     transition: all ease 0.5s;
 }
 
-.moveLeft img, .moveRight img {
+.moveLeft img,
+.moveRight img {
     filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
 }
 
@@ -57,7 +59,7 @@
     right: 0;
 }
 
-.list-main:hover .moveLeft, 
+.list-main:hover .moveLeft,
 .list-main:hover .moveRight {
     opacity: 1;
 }

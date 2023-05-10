@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import databaseMovies from './api';
-import Book from './components/Movie';
+import databaseBooks from './api';
+import Book from './components/Book';
 import Header from './components/Header';
 
 export default () => {
@@ -10,7 +10,7 @@ export default () => {
 
   useEffect(() => {
     const loadAll = async () => {
-      const list = await databaseMovies.getHomeList();
+      const list = await databaseBooks.getHomeList();
       setBookList(list);
     }
     loadAll();
@@ -24,7 +24,7 @@ export default () => {
       <section className='lists'>
         {bookList.map((item, key) => (
           <div key={key}>
-            <Book title={item.title} items={item.items.items} typedTextSearch={typedText} />
+            <Book title={item.title} items={item.items} typedTextSearch={typedText} />
           </div>
         ))}
       </section>

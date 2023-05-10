@@ -1,5 +1,4 @@
-const api_key = "2687e6b0903ab4ce56e0c22688207eda";
-const api_url = "https://www.googleapis.com/books/v1/volumes?q=all";
+const api_url = "http://localhost:3333/books";
 const language = 'pt-BR';
 
 const basicFetch = async (endpoint) => {
@@ -18,8 +17,4 @@ export default {
             },
         ]
     },
-
-    getMovieInfo: async (search, type) => {
-
-    }
 }

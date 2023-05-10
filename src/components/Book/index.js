@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react';
 import './index.css';
 
-// type MovieType = {
-//     title: String;
-
-// }
-
 export default ({ title, items, typedTextSearch }) => {
     const [listItems, setListItems] = useState([]);
+    const [showDetail, setShowDetail] = useState('none');
+
     useEffect(() => {
         if (!typedTextSearch) return setListItems(items);
-        setListItems(listItems.filter(item => item.volumeInfo.title.includes(typedTextSearch)));
+        setListItems(listItems.filter(item => item.title.includes(typedTextSearch)));
     }, [typedTextSearch])
     return (
         <div className='list-main'>
@@ -18,8 +15,11 @@ export default ({ title, items, typedTextSearch }) => {
             <div className='listarea'>
                 <div className='list' >
                     {listItems?.length > 0 && listItems.map((item, key) => (
-                        <div className='item' key={key}>
-                            <img src={item.volumeInfo.imageLinks.thumbnail} alt={item.volumeInfo.title} />
+                        <div className='item' key={key} onMouseOver={() => setShowDetail('inherit')} onMouseLeave={() => setShowDetail('none')}>
+                            <img src={item.image} alt={item.title} key={key} />
+                            <div id={item._id} style={{ display: showDetail }}>
+                                <h6>{item.title}</h6>
+                            </div>
                         </div>
                     ))}
                 </div>
