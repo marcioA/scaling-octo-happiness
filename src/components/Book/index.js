@@ -17,7 +17,7 @@ export default ({ title, items, typedTextSearch }) => {
                     {listItems?.length > 0 && listItems.map((item, key) => (
                         <div className='item' key={key} onMouseOver={() => setShowDetail('inherit')} onMouseLeave={() => setShowDetail('none')}>
                             <img src={item.image} alt={item.title} key={key} />
-                            <div id={item._id} style={{ display: showDetail }}>
+                            <div id={item._id} >
                                 <h6>{item.title}</h6>
                             </div>
                         </div>

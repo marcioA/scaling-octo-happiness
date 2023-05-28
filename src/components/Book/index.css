@@ -21,6 +21,10 @@
     cursor: pointer;
 }
 
+.item :nth-child(2) {
+    display: none;
+}
+
 .item img {
     width: 100%;
     transform: scale(0.9);
@@ -29,6 +33,10 @@
 
 .item img:hover {
     transform: scale(1);
+}
+
+.item:hover :nth-child(2) {
+    display: inherit;
 }
 
 .moveLeft,
