@@ -32,6 +32,7 @@ export function Home() {
             </section>
             <CustomModal
                 openModal={open}
+                setOpenModal={setOpen}
             />
         </div>
     )

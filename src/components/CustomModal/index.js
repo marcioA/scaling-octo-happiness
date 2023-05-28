@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import databaseBooks from '../../api';
-import { Box, Button, Modal, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, Modal, TextField, Typography } from '@mui/material';
 
-export function CustomModal({ openModal }) {
+export function CustomModal({ openModal, setOpenModal }) {
+    const [bookTitle, setBookTitle] = useState('');
+    const [bookAuthor, setBookAuthor] = useState('');
+    const [bookCategory, setBookCategory] = useState('');
+    const [bookPublication, setBookPublication] = useState('');
+    const [bookPages, setBookPages] = useState(1);
+    const [bookImage, setBookImage] = useState('');
+    const [bookStatus, setBookStatus] = useState({ status: null });
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -16,11 +24,29 @@ export function CustomModal({ openModal }) {
     };
 
     function handleClose() {
-        console.log('')
+        setOpenModal(false);
+    }
+
+    async function handleSaveBook() {
+        const dataBooks = {
+            title: bookTitle,
+            author: bookAuthor,
+            category: bookCategory,
+            publication: bookPublication,
+            pages: bookPages,
+            image: bookImage
+        }
+        const booksStatus = await databaseBooks.postBook(dataBooks);
+        setBookStatus(booksStatus);
     }
     return (
-        // title, author, category, publication, pages, image
         <React.Fragment>
+            {bookStatus.status === 'success' &&
+                <Alert severity="success">Livro Cadastrado com sucesso!</Alert>
+            }
+            {bookStatus.status === 'error' &&
+                <Alert severity="error">Ocorreu um erro, tente novamente.</Alert>
+            }
             <Modal
                 open={openModal}
                 onClose={handleClose}
@@ -39,8 +65,8 @@ export function CustomModal({ openModal }) {
                             color='primary'
                             id='book_name'
                             style={{ margin: 10 }}
-                        // value={typeString}
-                        // onChange={e => setTypeString(e.target.value)}
+                            value={bookTitle}
+                            onChange={e => setBookTitle(e.target.value)}
                         />
                         <TextField
                             margin="normal"
@@ -49,8 +75,8 @@ export function CustomModal({ openModal }) {
                             color='primary'
                             id='searchInputfield'
                             style={{ margin: 10 }}
-                        // value={typeString}
-                        // onChange={e => setTypeString(e.target.value)}
+                            value={bookAuthor}
+                            onChange={e => setBookAuthor(e.target.value)}
                         />
                         <TextField
                             margin="normal"
@@ -59,8 +85,8 @@ export function CustomModal({ openModal }) {
                             color='primary'
                             id='searchInputfield'
                             style={{ margin: 10 }}
-                        // value={typeString}
-                        // onChange={e => setTypeString(e.target.value)}
+                            value={bookCategory}
+                            onChange={e => setBookCategory(e.target.value)}
                         />
                         <TextField
                             margin="normal"
@@ -69,8 +95,8 @@ export function CustomModal({ openModal }) {
                             color='primary'
                             id='searchInputfield'
                             style={{ margin: 10 }}
-                        // value={typeString}
-                        // onChange={e => setTypeString(e.target.value)}
+                            value={bookPublication}
+                            onChange={e => setBookPublication(e.target.value)}
                         />
                         <TextField
                             margin="normal"
@@ -79,8 +105,8 @@ export function CustomModal({ openModal }) {
                             color='primary'
                             id='searchInputfield'
                             style={{ margin: 10 }}
-                        // value={typeString}
-                        // onChange={e => setTypeString(e.target.value)}
+                            value={bookPages}
+                            onChange={e => setBookPages(e.target.value)}
                         />
                         <TextField
                             margin="normal"
@@ -89,15 +115,15 @@ export function CustomModal({ openModal }) {
                             color='primary'
                             id='searchInputfield'
                             style={{ margin: 10 }}
-                        // value={typeString}
-                        // onChange={e => setTypeString(e.target.value)}
+                            value={bookImage}
+                            onChange={e => setBookImage(e.target.value)}
                         />
                     </Box>
-                    <Box>
-                        <Button >
+                    <Box sx={{ widt: '100%' }}>
+                        <Button onClick={handleSaveBook}>
                             Salvar
                         </Button>
-                        <Button >
+                        <Button onClick={handleClose}>
                             Cancelar
                         </Button>
                     </Box>
